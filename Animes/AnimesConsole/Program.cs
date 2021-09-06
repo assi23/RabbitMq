@@ -1,11 +1,11 @@
-﻿using Data.Models;
+﻿using AnimesConsole.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 
 namespace AnimesConsole
 {
-	class Program
+	public class Program
 	{
 		static void Main(string[] args)
 		{
@@ -20,8 +20,8 @@ namespace AnimesConsole
                     var anime = System.Text.Json.JsonSerializer.Deserialize<Animes>(body);
                     Console.WriteLine(" [x] Received {0}", anime.Name);
                 };
-                channel.BasicConsume(queue: "product_queue",
-                                                            autoAck: true,
+                channel.BasicConsume(queue: "animes_queue",
+                                                            autoAck: false,
                                                             consumer: consumer);
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
