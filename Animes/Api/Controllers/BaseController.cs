@@ -21,7 +21,7 @@ namespace Api.Controllers
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare(
-                        queue: "product_queue",
+                        queue: "animes_queue",
                         durable: false,
                         exclusive: false,
                         autoDelete: false,
@@ -31,7 +31,7 @@ namespace Api.Controllers
                 string message = System.Text.Json.JsonSerializer.Serialize(model);
                 var body = Encoding.UTF8.GetBytes(message);
                 channel.BasicPublish(exchange: "",
-                                                routingKey: "product_queue",
+                                                routingKey: "animes_queue",
                                                 basicProperties: null,
                                                 body: body);
             }
